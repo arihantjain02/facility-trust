@@ -76,9 +76,14 @@ export const submitEvidence = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { supabase, userId, claims } = context;
     const roles = await getRoles(supabase, userId);
-    if (!roles.some((r) => ["FACILITY_STAFF", "DISTRICT_SUPERVISOR", "ADMIN"].includes(r))) {
-      throw new Error("Forbidden: only facility staff, supervisors or admins may submit evidence");
+    if (
+      !roles.some((r) =>
+        ["FACILITY_STAFF", "DISTRICT_SUPERVISOR", "REFERRAL_WORKER", "ADMIN"].includes(r),
+      )
+    ) {
+      throw new Error("Your account does not have a role that can record service reports.");
     }
+
     const observedAt = data.observed_at ?? new Date().toISOString();
     const settings = await loadSettings(supabase);
 
