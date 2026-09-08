@@ -36,16 +36,23 @@ export const getDashboardAnalytics = createServerFn({ method: "GET" })
     const unavailable = refs.filter((r: any) => r.status === "SERVICE_UNAVAILABLE").length;
     const settled = provided + unavailable;
 
-    const freshnessCounts = { VERY_FRESH: 0, FRESH: 0, AGING: 0, STALE: 0 } as Record<string, number>;
+    const freshnessCounts: Record<string, number> = {
+      VERY_FRESH: 0,
+      FRESH: 0,
+      AGING: 0,
+      STALE: 0,
+    };
     let ageSum = 0;
     for (const e of evs) {
       const age = ageMinutes(e.observed_at, now);
       ageSum += age;
-      freshnessCounts[freshnessBand(age, settings.thresholds)] += 1;
+      const band = freshnessBand(age, settings.thresholds);
+      freshnessCounts[band] = (freshnessCounts[band] ?? 0) + 1;
     }
     const freshShare = evs.length
-      ? (freshnessCounts.VERY_FRESH! + freshnessCounts.FRESH!) / evs.length
+      ? ((freshnessCounts["VERY_FRESH"] ?? 0) + (freshnessCounts["FRESH"] ?? 0)) / evs.length
       : 0;
+
 
     // referrals over time (last 14 days)
     const days: Array<{ day: string; total: number; provided: number; failed: number }> = [];
