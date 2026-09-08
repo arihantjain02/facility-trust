@@ -80,10 +80,10 @@ const facilitySchema = z.object({
   name: z.string().min(2).max(120),
   type: z.enum(["PHC", "CHC", "DISTRICT_HOSPITAL"]),
   district: z.string().min(2).max(80),
-  address: z.string().max(240).optional().nullable(),
+  address: z.string().max(240).nullish().transform((v) => v ?? null),
   latitude: z.number().min(-90).max(90),
   longitude: z.number().min(-180).max(180),
-  contact: z.string().max(60).optional().nullable(),
+  contact: z.string().max(60).nullish().transform((v) => v ?? null),
   is_active: z.boolean().default(true),
 });
 
@@ -93,9 +93,10 @@ export const saveFacility = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { supabase, userId, claims } = context;
     requireRole(await getRoles(supabase, userId), ["ADMIN"]);
-    const payload = { ...data, updated_at: new Date().toISOString() };
-    const query = data.id
-      ? supabase.from("facilities").update(payload).eq("id", data.id).select("*").maybeSingle()
+    const { id, ...fields } = data;
+    const payload = { ...fields, updated_at: new Date().toISOString() };
+    const query = id
+      ? supabase.from("facilities").update(payload).eq("id", id).select("*").maybeSingle()
       : supabase
           .from("facilities")
           .insert({ ...payload, created_by: userId })
@@ -139,7 +140,7 @@ const serviceSchema = z.object({
   id: z.string().uuid().optional(),
   code: z.string().min(2).max(40),
   name: z.string().min(2).max(80),
-  description: z.string().max(240).optional().nullable(),
+  description: z.string().max(240).nullish().transform((v) => v ?? null),
   is_active: z.boolean().default(true),
 });
 
@@ -149,9 +150,10 @@ export const saveService = createServerFn({ method: "POST" })
   .handler(async ({ data, context }) => {
     const { supabase, userId, claims } = context;
     requireRole(await getRoles(supabase, userId), ["ADMIN"]);
-    const query = data.id
-      ? supabase.from("services").update(data).eq("id", data.id).select("*").maybeSingle()
-      : supabase.from("services").insert(data).select("*").maybeSingle();
+    const { id, ...fields } = data;
+    const query = id
+      ? supabase.from("services").update(fields).eq("id", id).select("*").maybeSingle()
+      : supabase.from("services").insert(fields).select("*").maybeSingle();
     const { data: row, error } = await query;
     if (error) throw new Error(error.message);
     await writeAudit(supabase, {
@@ -173,7 +175,7 @@ export const setFacilityServiceRegistration = createServerFn({ method: "POST" })
         service_id: z.string().uuid(),
         is_registered: z.boolean(),
         is_blocked: z.boolean().default(false),
-        blocked_reason: z.string().max(160).optional().nullable(),
+        blocked_reason: z.string().max(160).nullish().transform((v) => v ?? null),
       })
       .parse(d),
   )
