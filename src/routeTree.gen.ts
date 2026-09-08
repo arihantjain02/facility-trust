@@ -14,6 +14,7 @@ import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EvidenceRouteImport } from './routes/evidence'
+import { Route as ReferralsRouteImport } from './routes/referrals'
 import { Route as ValidationRouteImport } from './routes/validation'
 
 const IndexRoute = IndexRouteImport.update({
@@ -41,6 +42,11 @@ const EvidenceRoute = EvidenceRouteImport.update({
   path: '/evidence',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReferralsRoute = ReferralsRouteImport.update({
+  id: '/referrals',
+  path: '/referrals',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ValidationRoute = ValidationRouteImport.update({
   id: '/validation',
   path: '/validation',
@@ -53,6 +59,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
+  '/referrals': typeof ReferralsRoute
   '/validation': typeof ValidationRoute
 }
 export interface FileRoutesByTo {
@@ -61,6 +68,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
+  '/referrals': typeof ReferralsRoute
   '/validation': typeof ValidationRoute
 }
 export interface FileRoutesById {
@@ -70,14 +78,28 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
+  '/referrals': typeof ReferralsRoute
   '/validation': typeof ValidationRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/analytics' | '/auth' | '/dashboard' | '/evidence' | '/validation'
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/dashboard'
+    | '/evidence'
+    | '/referrals'
+    | '/validation'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/analytics' | '/auth' | '/dashboard' | '/evidence' | '/validation'
+  to:
+    | '/'
+    | '/analytics'
+    | '/auth'
+    | '/dashboard'
+    | '/evidence'
+    | '/referrals'
+    | '/validation'
   id:
     | '__root__'
     | '/'
@@ -85,6 +107,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/dashboard'
     | '/evidence'
+    | '/referrals'
     | '/validation'
   fileRoutesById: FileRoutesById
 }
@@ -94,6 +117,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   EvidenceRoute: typeof EvidenceRoute
+  ReferralsRoute: typeof ReferralsRoute
   ValidationRoute: typeof ValidationRoute
 }
 
@@ -134,6 +158,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EvidenceRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/referrals': {
+      id: '/referrals'
+      path: '/referrals'
+      fullPath: '/referrals'
+      preLoaderRoute: typeof ReferralsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/validation': {
       id: '/validation'
       path: '/validation'
@@ -150,6 +181,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   EvidenceRoute: EvidenceRoute,
+  ReferralsRoute: ReferralsRoute,
   ValidationRoute: ValidationRoute,
 }
 export const routeTree = rootRouteImport
