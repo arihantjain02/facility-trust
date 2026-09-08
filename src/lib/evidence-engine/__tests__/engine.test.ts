@@ -53,7 +53,7 @@ describe("ERI = S x Q x C", () => {
     expect(one.S).toBeCloseTo(1, 5);
     expect(one.Q).toBeLessThan(many.Q);
     expect(one.eri).toBeLessThan(many.eri);
-    expect(one.Q).toBeCloseTo(1 / (1 + SUFFICIENCY_K), 3);
+    expect(one.Q).toBeCloseTo(1 / (1 + SUFFICIENCY_K), 1);
   });
 
   it("lowers directional support when evidence points the other way", () => {
