@@ -33,7 +33,7 @@ export interface CandidateInput {
 export interface RankedCandidate {
   facility: CandidateInput["facility"];
   eligible: boolean;
-  excludedReason?: string;
+  excludedReason?: string | undefined;
   distanceKm: number;
   breakdown: EriBreakdown;
   score: number;
