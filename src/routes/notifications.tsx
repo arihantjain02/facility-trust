@@ -84,12 +84,12 @@ function NotificationsPage() {
   });
 
   const types = useMemo(
-    () => Array.from(new Set((data ?? []).map((n: any) => n.type as string))).sort(),
+    () => Array.from(new Set((data ?? []).map((n: any) => n.kind as string))).sort(),
     [data],
   );
 
   const filtered = useMemo(
-    () => (data ?? []).filter((n: any) => filterType === "ALL" || n.type === filterType),
+    () => (data ?? []).filter((n: any) => filterType === "ALL" || n.kind === filterType),
     [data, filterType],
   );
 
@@ -155,7 +155,7 @@ function NotificationsPage() {
             ) : (
               <ul className="space-y-2">
                 {unread.map((n: any) => {
-                  const Icon = iconFor(n.type);
+                  const Icon = iconFor(n.kind);
                   return (
                     <li
                       key={n.id}
@@ -164,8 +164,8 @@ function NotificationsPage() {
                       <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <p className="truncate font-medium">{n.title ?? humanise(n.type)}</p>
-                          <StatusPill tone={toneFor(n.type)}>{humanise(n.type)}</StatusPill>
+                          <p className="truncate font-medium">{n.title}</p>
+                          <StatusPill tone={toneFor(n.kind)}>{humanise(n.kind)}</StatusPill>
                         </div>
                         {n.body && <p className="mt-0.5 text-sm text-muted-foreground">{n.body}</p>}
                         <p className="mt-1 text-xs text-muted-foreground">
@@ -199,7 +199,7 @@ function NotificationsPage() {
             ) : (
               <ul className="space-y-2">
                 {read.map((n: any) => {
-                  const Icon = iconFor(n.type);
+                  const Icon = iconFor(n.kind);
                   return (
                     <li
                       key={n.id}
@@ -208,7 +208,7 @@ function NotificationsPage() {
                       <Icon className="mt-0.5 size-4 shrink-0 text-muted-foreground" />
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
-                          <p className="truncate font-medium">{n.title ?? humanise(n.type)}</p>
+                          <p className="truncate font-medium">{n.title}</p>
                           <StatusPill tone="neutral">{humanise(n.type)}</StatusPill>
                         </div>
                         {n.body && <p className="mt-0.5 text-sm text-muted-foreground">{n.body}</p>}
