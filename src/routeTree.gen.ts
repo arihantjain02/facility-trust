@@ -10,16 +10,27 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AnalyticsRouteImport } from './routes/analytics'
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as EvidenceRouteImport } from './routes/evidence'
-import { Route as ReferralsRouteImport } from './routes/referrals'
+import { Route as FacilitiesRouteImport } from './routes/facilities'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as ValidationRouteImport } from './routes/validation'
+import { Route as VerifyRouteImport } from './routes/verify'
+import { Route as ReferralsIndexRouteImport } from './routes/referrals.index'
+import { Route as ReferralsIdRouteImport } from './routes/referrals.$id'
+import { Route as ReferralsNewRouteImport } from './routes/referrals.new'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AnalyticsRoute = AnalyticsRouteImport.update({
@@ -42,9 +53,14 @@ const EvidenceRoute = EvidenceRouteImport.update({
   path: '/evidence',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ReferralsRoute = ReferralsRouteImport.update({
-  id: '/referrals',
-  path: '/referrals',
+const FacilitiesRoute = FacilitiesRouteImport.update({
+  id: '/facilities',
+  path: '/facilities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ValidationRoute = ValidationRouteImport.update({
@@ -52,73 +68,135 @@ const ValidationRoute = ValidationRouteImport.update({
   path: '/validation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VerifyRoute = VerifyRouteImport.update({
+  id: '/verify',
+  path: '/verify',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferralsIndexRoute = ReferralsIndexRouteImport.update({
+  id: '/referrals/',
+  path: '/referrals/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferralsIdRoute = ReferralsIdRouteImport.update({
+  id: '/referrals/$id',
+  path: '/referrals/$id',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferralsNewRoute = ReferralsNewRouteImport.update({
+  id: '/referrals/new',
+  path: '/referrals/new',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
-  '/referrals': typeof ReferralsRoute
+  '/facilities': typeof FacilitiesRoute
+  '/notifications': typeof NotificationsRoute
   '/validation': typeof ValidationRoute
+  '/verify': typeof VerifyRoute
+  '/referrals/$id': typeof ReferralsIdRoute
+  '/referrals/new': typeof ReferralsNewRoute
+  '/referrals/': typeof ReferralsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
-  '/referrals': typeof ReferralsRoute
+  '/facilities': typeof FacilitiesRoute
+  '/notifications': typeof NotificationsRoute
   '/validation': typeof ValidationRoute
+  '/verify': typeof VerifyRoute
+  '/referrals/$id': typeof ReferralsIdRoute
+  '/referrals/new': typeof ReferralsNewRoute
+  '/referrals': typeof ReferralsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/analytics': typeof AnalyticsRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof DashboardRoute
   '/evidence': typeof EvidenceRoute
-  '/referrals': typeof ReferralsRoute
+  '/facilities': typeof FacilitiesRoute
+  '/notifications': typeof NotificationsRoute
   '/validation': typeof ValidationRoute
+  '/verify': typeof VerifyRoute
+  '/referrals/$id': typeof ReferralsIdRoute
+  '/referrals/new': typeof ReferralsNewRoute
+  '/referrals/': typeof ReferralsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/admin'
     | '/analytics'
     | '/auth'
     | '/dashboard'
     | '/evidence'
-    | '/referrals'
+    | '/facilities'
+    | '/notifications'
     | '/validation'
+    | '/verify'
+    | '/referrals/$id'
+    | '/referrals/new'
+    | '/referrals/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/admin'
     | '/analytics'
     | '/auth'
     | '/dashboard'
     | '/evidence'
-    | '/referrals'
+    | '/facilities'
+    | '/notifications'
     | '/validation'
+    | '/verify'
+    | '/referrals/$id'
+    | '/referrals/new'
+    | '/referrals'
   id:
     | '__root__'
     | '/'
+    | '/admin'
     | '/analytics'
     | '/auth'
     | '/dashboard'
     | '/evidence'
-    | '/referrals'
+    | '/facilities'
+    | '/notifications'
     | '/validation'
+    | '/verify'
+    | '/referrals/$id'
+    | '/referrals/new'
+    | '/referrals/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   AnalyticsRoute: typeof AnalyticsRoute
   AuthRoute: typeof AuthRoute
   DashboardRoute: typeof DashboardRoute
   EvidenceRoute: typeof EvidenceRoute
-  ReferralsRoute: typeof ReferralsRoute
+  FacilitiesRoute: typeof FacilitiesRoute
+  NotificationsRoute: typeof NotificationsRoute
   ValidationRoute: typeof ValidationRoute
+  VerifyRoute: typeof VerifyRoute
+  ReferralsIdRoute: typeof ReferralsIdRoute
+  ReferralsNewRoute: typeof ReferralsNewRoute
+  ReferralsIndexRoute: typeof ReferralsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -128,6 +206,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/analytics': {
@@ -158,11 +243,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof EvidenceRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/referrals': {
-      id: '/referrals'
-      path: '/referrals'
-      fullPath: '/referrals'
-      preLoaderRoute: typeof ReferralsRouteImport
+    '/facilities': {
+      id: '/facilities'
+      path: '/facilities'
+      fullPath: '/facilities'
+      preLoaderRoute: typeof FacilitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/validation': {
@@ -172,17 +264,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ValidationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/verify': {
+      id: '/verify'
+      path: '/verify'
+      fullPath: '/verify'
+      preLoaderRoute: typeof VerifyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referrals/': {
+      id: '/referrals/'
+      path: '/referrals'
+      fullPath: '/referrals/'
+      preLoaderRoute: typeof ReferralsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referrals/$id': {
+      id: '/referrals/$id'
+      path: '/referrals/$id'
+      fullPath: '/referrals/$id'
+      preLoaderRoute: typeof ReferralsIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/referrals/new': {
+      id: '/referrals/new'
+      path: '/referrals/new'
+      fullPath: '/referrals/new'
+      preLoaderRoute: typeof ReferralsNewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   AnalyticsRoute: AnalyticsRoute,
   AuthRoute: AuthRoute,
   DashboardRoute: DashboardRoute,
   EvidenceRoute: EvidenceRoute,
-  ReferralsRoute: ReferralsRoute,
+  FacilitiesRoute: FacilitiesRoute,
+  NotificationsRoute: NotificationsRoute,
   ValidationRoute: ValidationRoute,
+  VerifyRoute: VerifyRoute,
+  ReferralsIdRoute: ReferralsIdRoute,
+  ReferralsNewRoute: ReferralsNewRoute,
+  ReferralsIndexRoute: ReferralsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
