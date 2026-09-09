@@ -475,7 +475,7 @@ function RegistrationTab() {
           </div>
           {!facilityId ? (
             <EmptyState title="Select a facility" body="Choose a facility above to manage its registered services." />
-          ) : (data.services ?? services.data ?? []).length === 0 ? (
+          ) : (services.data ?? []).length === 0 ? (
             <EmptyState title="No services defined" />
           ) : (
             <DataTable head={["Service", "Registered"]}>
