@@ -197,7 +197,7 @@ function ReferralDetailPage() {
         {breakdown ? (
           <div className="space-y-4">
             <div className="flex flex-wrap items-center gap-3">
-              <EriBadge value={referral.selected_eri} />
+              <EriBadge value={referral.selected_eri ?? 0} />
             </div>
             <div className="grid gap-2 sm:grid-cols-3">
               <Meter label="Support (S)" value={breakdown.S} tone="info" />
@@ -252,11 +252,11 @@ function ReferralDetailPage() {
       </Section>
 
       <Section title="Status history">
-        {query.data.history.length === 0 ? (
+        {(query.data?.history ?? []).length === 0 ? (
           <EmptyState title="No history yet" />
         ) : (
           <ol className="space-y-2 text-sm">
-            {query.data.history.map((h: any) => (
+            {(query.data?.history ?? []).map((h: any) => (
               <li key={h.id} className="flex flex-wrap items-center gap-2 border-b border-border pb-2 last:border-0">
                 <span className="font-medium">{humanise(h.to_status)}</span>
                 <span className="text-xs text-muted-foreground">{new Date(h.changed_at).toLocaleString()}</span>
@@ -268,10 +268,10 @@ function ReferralDetailPage() {
       </Section>
 
       <Section title="Outcome" description="What happened to this referral?">
-        {query.data.outcome ? (
+        {query.data?.outcome ? (
           <div className="space-y-3">
-            <StatusPill tone={query.data.outcome.outcome === "SERVICE_PROVIDED" ? "ok" : "danger"}>
-              {humanise(query.data.outcome.outcome)}
+            <StatusPill tone={query.data?.outcome.outcome === "SERVICE_PROVIDED" ? "ok" : "danger"}>
+              {humanise(query.data?.outcome.outcome)}
             </StatusPill>
             <p className="text-sm text-muted-foreground">
               Outcome recorded. New evidence added to the ledger.
