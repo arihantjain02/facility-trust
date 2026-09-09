@@ -95,7 +95,7 @@ export function FacilityDetailSheet({
                 {evidence.isLoading ? (
                   <SkeletonRows rows={3} className="mt-3" />
                 ) : registrations.length === 0 ? (
-                  <EmptyState title="No services registered" className="mt-3" body="This facility has no registered services yet." />
+                  <EmptyState title="No services registered" body="This facility has no registered services yet." />
                 ) : (
                   <div className="mt-3 space-y-3">
                     {registrations.map((reg) => {
@@ -146,7 +146,7 @@ export function FacilityDetailSheet({
                 {evidence.isLoading ? (
                   <SkeletonRows rows={4} className="mt-2" />
                 ) : events.length === 0 ? (
-                  <EmptyState title="No evidence recorded yet" className="mt-2" />
+                  <EmptyState title="No evidence recorded yet" />
                 ) : (
                   <DataTable head={["Time", "Service", "Observation", "Source"]} className="mt-2">
                     {events.slice(0, 20).map((e: any) => (
@@ -168,7 +168,7 @@ export function FacilityDetailSheet({
                 {referrals.isLoading ? (
                   <SkeletonRows rows={2} className="mt-2" />
                 ) : facilityReferrals.length === 0 ? (
-                  <EmptyState title="No referrals recorded to this facility yet" className="mt-2" />
+                  <EmptyState title="No referrals recorded to this facility yet" />
                 ) : (
                   <div className="mt-2 grid grid-cols-3 gap-3 text-sm">
                     <div className="rounded-md border border-border p-3">
