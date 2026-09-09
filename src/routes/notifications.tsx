@@ -209,7 +209,7 @@ function NotificationsPage() {
                       <div className="min-w-0">
                         <div className="flex flex-wrap items-center gap-2">
                           <p className="truncate font-medium">{n.title}</p>
-                          <StatusPill tone="neutral">{humanise(n.type)}</StatusPill>
+                          <StatusPill tone="neutral">{humanise(n.kind)}</StatusPill>
                         </div>
                         {n.body && <p className="mt-0.5 text-sm text-muted-foreground">{n.body}</p>}
                         <p className="mt-1 text-xs text-muted-foreground">
