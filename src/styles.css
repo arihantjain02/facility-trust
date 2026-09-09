@@ -143,32 +143,83 @@
   }
 }
 
-/* RELI-REF design system: clinical slate + evidence teal + amber signal */
+/* ==========================================================================
+   RELI-REF design system
+   Institutional navy + public-health teal. Engineered, not decorated.
+   ========================================================================== */
 :root {
-  --background: oklch(0.985 0.005 230);
-  --foreground: oklch(0.24 0.03 240);
+  --radius: 0.375rem;
+
+  --background: oklch(0.975 0.004 250);
+  --foreground: oklch(0.22 0.025 255);
+
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.03 240);
+  --card-foreground: oklch(0.22 0.025 255);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.03 240);
-  --primary: oklch(0.52 0.11 205);
-  --primary-foreground: oklch(0.99 0.01 200);
-  --secondary: oklch(0.95 0.02 220);
-  --secondary-foreground: oklch(0.3 0.04 235);
-  --muted: oklch(0.955 0.01 225);
-  --muted-foreground: oklch(0.52 0.03 240);
-  --accent: oklch(0.93 0.05 195);
-  --accent-foreground: oklch(0.3 0.06 220);
-  --destructive: oklch(0.55 0.19 25);
+  --popover-foreground: oklch(0.22 0.025 255);
+
+  /* deep government navy */
+  --primary: oklch(0.34 0.075 258);
+  --primary-foreground: oklch(0.98 0.005 250);
+
+  --secondary: oklch(0.955 0.008 250);
+  --secondary-foreground: oklch(0.3 0.035 256);
+
+  --muted: oklch(0.958 0.006 250);
+  --muted-foreground: oklch(0.505 0.022 256);
+
+  /* healthcare teal */
+  --accent: oklch(0.55 0.085 195);
+  --accent-foreground: oklch(0.99 0.005 200);
+
+  --destructive: oklch(0.545 0.19 26);
   --destructive-foreground: oklch(0.99 0 0);
-  --border: oklch(0.9 0.015 225);
-  --input: oklch(0.9 0.015 225);
-  --ring: oklch(0.52 0.11 205);
-  --radius: 0.5rem;
-  --signal-strong: oklch(0.62 0.13 160);
-  --signal-medium: oklch(0.75 0.14 85);
-  --signal-weak: oklch(0.58 0.18 30);
-  --surface-deep: oklch(0.26 0.04 240);
+
+  --border: oklch(0.905 0.01 250);
+  --input: oklch(0.895 0.012 250);
+  --ring: oklch(0.55 0.085 195);
+
+  /* status palette */
+  --ok: oklch(0.56 0.13 155);
+  --ok-soft: oklch(0.955 0.035 155);
+  --warn: oklch(0.7 0.15 78);
+  --warn-soft: oklch(0.965 0.05 85);
+  --danger: oklch(0.56 0.19 26);
+  --danger-soft: oklch(0.958 0.035 25);
+  --info: oklch(0.54 0.13 250);
+  --info-soft: oklch(0.955 0.03 250);
+  --stale: oklch(0.55 0.02 255);
+  --stale-soft: oklch(0.945 0.005 255);
+
+  /* signals used by the evidence engine UI */
+  --signal-strong: var(--ok);
+  --signal-medium: var(--warn);
+  --signal-weak: var(--danger);
+
+  --surface-deep: oklch(0.245 0.045 258);
+  --surface-deep-2: oklch(0.295 0.05 258);
+  --surface-sunken: oklch(0.965 0.005 250);
+
+  --sidebar: oklch(0.235 0.045 258);
+  --sidebar-foreground: oklch(0.93 0.012 250);
+  --sidebar-primary: oklch(0.6 0.1 195);
+  --sidebar-primary-foreground: oklch(0.15 0.03 255);
+  --sidebar-accent: oklch(0.31 0.05 258);
+  --sidebar-accent-foreground: oklch(0.98 0.005 250);
+  --sidebar-border: oklch(1 0 0 / 12%);
+  --sidebar-ring: oklch(0.6 0.1 195);
+
+  --chart-1: oklch(0.56 0.13 155);
+  --chart-2: oklch(0.54 0.13 250);
+  --chart-3: oklch(0.7 0.15 78);
+  --chart-4: oklch(0.56 0.19 26);
+  --chart-5: oklch(0.55 0.085 195);
+
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  --shadow-card: 0 1px 2px oklch(0.22 0.025 255 / 6%), 0 1px 1px oklch(0.22 0.025 255 / 4%);
+  --shadow-raised: 0 4px 16px -6px oklch(0.22 0.025 255 / 18%);
 }
 
 @theme inline {
@@ -176,4 +227,59 @@
   --color-signal-medium: var(--signal-medium);
   --color-signal-weak: var(--signal-weak);
   --color-surface-deep: var(--surface-deep);
+  --color-surface-deep-2: var(--surface-deep-2);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-stale: var(--stale);
+  --color-stale-soft: var(--stale-soft);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --shadow-card: var(--shadow-card);
+  --shadow-raised: var(--shadow-raised);
 }
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    font-feature-settings: "cv05", "ss01";
+  }
+  h1, h2, h3, h4 {
+    letter-spacing: -0.014em;
+  }
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+  }
+  ::selection {
+    background: oklch(0.55 0.085 195 / 22%);
+  }
+}
+
+/* Numeric data should always align */
+@utility tnum {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum";
+}
+
+/* Thin institutional rule used above section titles */
+@utility rule-top {
+  border-top: 2px solid var(--primary);
+}
+
+@utility surface {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+}
+
