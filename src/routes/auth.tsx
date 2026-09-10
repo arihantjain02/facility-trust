@@ -45,21 +45,34 @@ function AuthPage() {
     e?.preventDefault();
     setBusy(true);
     setMessage(null);
+    let signedIn = false;
     try {
       try {
         await provisionDemoUsers();
       } catch {
         /* demo accounts may already exist */
       }
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setMessage(error.message);
-      else router.navigate({ to: "/dashboard" });
-    } catch {
-      setMessage("Sign-in is temporarily unavailable. Please try again shortly.");
+      else if (data.session) signedIn = true;
+    } catch (err) {
+      setMessage(
+        err instanceof Error && err.message
+          ? err.message
+          : "Sign-in is temporarily unavailable. Please try again shortly.",
+      );
     } finally {
       setBusy(false);
     }
+    if (signedIn) {
+      try {
+        await router.navigate({ to: "/dashboard" });
+      } catch {
+        window.location.href = "/dashboard";
+      }
+    }
   };
+
 
   return (
     <div className="grid min-h-screen lg:grid-cols-2">
