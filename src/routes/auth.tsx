@@ -46,14 +46,19 @@ function AuthPage() {
     setBusy(true);
     setMessage(null);
     try {
-      await provisionDemoUsers();
+      try {
+        await provisionDemoUsers();
+      } catch {
+        /* demo accounts may already exist */
+      }
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) setMessage(error.message);
+      else router.navigate({ to: "/dashboard" });
     } catch {
-      /* demo accounts may already exist */
+      setMessage("Sign-in is temporarily unavailable. Please try again shortly.");
+    } finally {
+      setBusy(false);
     }
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setBusy(false);
-    if (error) setMessage(error.message);
-    else router.navigate({ to: "/dashboard" });
   };
 
   return (
