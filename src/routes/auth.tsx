@@ -2,7 +2,7 @@ import { createFileRoute, Link, useRouter } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { AlertCircle } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
-import { provisionDemoUsers, DEMO_USERS } from "@/lib/api/demo.functions";
+import { DEMO_USERS } from "@/lib/demo-users";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -47,11 +47,6 @@ function AuthPage() {
     setMessage(null);
     let signedIn = false;
     try {
-      try {
-        await provisionDemoUsers();
-      } catch {
-        /* demo accounts may already exist */
-      }
       const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) setMessage(error.message);
       else if (data.session) signedIn = true;
